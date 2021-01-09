@@ -1,0 +1,125 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+body {
+    height: 100%!important;
+}
+
+.container {
+    padding: 0 15px;
+}
+
+.breadcrumb {
+    background-color: transparent;
+}
+
+.breadcrumb, .breadcrumb-item {
+    padding: 0;
+}
+
+span[class^="quantity-action"] {
+    color: #007bff;
+    opacity: 0.6;
+}
+
+span[class^="quantity-action"]:hover {
+    color: #007bff;
+    opacity: 1;
+}
+
+.product-card {
+    height: 15rem;
+    color: #000;
+}
+
+.product-card:hover {
+    color: #007bff;
+}
+
+.product-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.product-image {
+    height: 9.5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.product-main-image {
+    max-width: 30rem;
+}
+
+.product-image > img {
+    width: 100%;
+    height: 100%;
+}
+
+.product-body {
+    position: absolute;
+    bottom: 0.1em;
+    height: 5rem;
+}
+
+.product-body a {
+
+}
+
+.product-price {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.shopping-cart-button {
+    text-align: center;
+    opacity: 0.8;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    background: #007bff;
+    border-radius: 6.25rem;
+    color: #FFF;
+    font-size: .9rem;
+    line-height: 2.4rem;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.shopping-cart-button-disabled {
+    text-align: center;
+    opacity: 0.8;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    background: #343a40;
+    border-radius: 6.25rem;
+    color: #FFF;
+    font-size: .9rem;
+    line-height: 2.4rem;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.shopping-cart-button-position {
+    position: absolute;
+    top: 8rem;
+    right: 1rem;
+}
+
+.shopping-cart-button:hover {
+    color: #fff;
+    opacity: 1;
+}
+
+.shopping-cart-button i {
+    vertical-align: middle;
+}

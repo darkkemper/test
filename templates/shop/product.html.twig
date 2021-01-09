@@ -1,0 +1,47 @@
+{% extends 'shop/index.html.twig' %}
+
+{% block title %}{{ product.title }} купить в магазине "Магазин тортов"{% endblock %}
+
+{% block content %}
+    <div class="row mt-4">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                    <li class="breadcrumb-item">{{ product.title }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h3>{{ product.title }}</h3>
+            {% set available = true %}
+            {% if product.quantity == 0 or product.quantity is null %}
+                {% set available = false %}
+            {% endif %}
+            <span style="font-size: 1.75rem;">{{ (product.price / 100) | format_currency('RUB', locale='ru') }} <small class="text-muted">за 1 шт</small> </span>
+            {% if available %}
+                <div class="shopping-cart-button-main btn btn-primary text-center mt-n3"
+                     data-thumbnail="{{ asset('uploads/files/' ~ product.thumbnail) | imagine_filter('product_card_thumb') }}"
+                     data-vendor-code="{{ product.vendorCode }}"
+                     data-title="{{ product.title }}"
+                     data-url="{{ product.url }}"
+                     data-price="{{ product.price }}"
+                     data-quantity="{{ product.quantity }}"
+                >
+                    в корзину
+                    <i class="fas fa-shopping-cart"></i>
+                </div>&nbsp;
+            {% else %}
+                <div class="btn btn-dark text-center mt-n3 disabled">нет в наличии</div>
+            {% endif %}
+
+            <br><br>
+            <p><strong>Описание:</strong> {{ product.description | raw}}</p>
+        </div>
+        <div class="col-6 text-right">
+            <img src="{{ asset('uploads/files/' ~ product.thumbnail) }}" alt="{{ product.title }}" class="product-main-image"/>
+        </div>
+    </div>
+{% endblock %}

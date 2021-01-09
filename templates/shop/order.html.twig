@@ -1,0 +1,85 @@
+{% extends 'shop/index.html.twig' %}
+
+{% block title %}Оформление заказа{% endblock %}
+
+{% block content %}
+    <div class="row mt-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="padding: 0">
+                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Оформление заказа</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-6">
+            {% if proceed %}
+                <script type="application/javascript">
+                  localStorage.setItem('shopping-cart',  JSON.stringify({'products' : []}));
+                  window.location = '/';
+                </script>
+            {% endif %}
+            <h4>Ваши данные</h4>
+            <br>
+            <form method="post" id="order">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticity_token') }}">
+                <input type="hidden" name="products" value="">
+                <input type="hidden" class="cart-total-price" name="cart-total-price" value="">
+                <p>Имя получателя и email</p>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" autocomplete="off">
+                </div>
+                <p>Укажите точный адрес доставки</p>
+                <div class="form-group">
+                    <input type="text" class="form-control delivery-address" id="address" name="address" value="{{ user.address }}" autocomplete="off">
+                </div>
+                <p>Комментарий к заказу</p>
+                <div class="form-group">
+                    <textarea class="form-control" id="description" name="description" rows="3" placeholder="Напишите комментари к заказу"></textarea>
+                    <label for="description"></label>
+                </div>
+
+                <button id="shopping-cart-submit" class="btn btn-lg btn-primary" type="submit">Оформить заказ</button>
+            </form>
+        </div>
+
+        <div class="col-6">
+            <div class="row">
+                <div class="col">
+                    <h4>Корзина</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="m-auto position-absolute w-100 text-center shopping-cart-list-spinner d-none">
+                        <span class="spinner-border text-success" role="status" aria-hidden="true"></span>
+                    </div>
+                    <div class="col mt-3 shopping-cart-list blur-content">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col text-left">
+                    <span class="text-muted">Доставка:</span>
+                </div>
+                <div class="col text-right">
+                    <span class="text-muted">100,00 ₽</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-left">
+                    <span class="h5">Итого:</span>
+                </div>
+                <div class="col text-right">
+                    <span class="cart-total-price total-delivery-price h5">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+<a href="/{{ product.url }}.html" class="col-3 product-card align-text-bottom {{ margin }}">
+    <div class="product-image" style="background-image: url('{{ asset('uploads/files/' ~ product.thumbnail) | imagine_filter('product_card_thumb') }}')">
+        {#<img src="{{ asset('uploads/files/' ~ product.thumbnail) | imagine_filter('product_card_thumb') }}" class="product-image-thumb" alt="{{ product.title }}">#}
+        <div class="{% if (available) %}shopping-cart-button{% else %}shopping-cart-button-disabled{% endif %} shopping-cart-button-position"
+             data-thumbnail="{{ asset('uploads/files/' ~ product.thumbnail) | imagine_filter('product_card_thumb') }}"
+             data-vendor-code="{{ product.vendorCode }}"
+             data-title="{{ product.title }}"
+             data-url="{{ product.url }}"
+             data-price="{{ product.price }}"
+             data-quantity="{{ product.quantity }}"
+        >
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+    </div>
+    <div class="product-body mt-5">
+        <div class="product-notice-{{ product.vendorCode }}">
+            {% if available %}
+                <span class="small text-success">В наличии {{ product.quantity }} шт</span>
+            {% else %}
+                <span class="small text-danger">Нет в наличии</span>
+            {% endif %}
+        </div>
+        <div class="product-title">{{ product.title }}</div>
+        <div class="product-price">
+            {% if product.price is not null %}
+                {{ (product.price / 100) | format_currency('RUB', locale='ru') }} <small class="text-muted">за 1 шт</small>
+            {% endif %}
+        </div>
+    </div>
+</a>

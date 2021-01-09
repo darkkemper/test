@@ -1,0 +1,24 @@
+{% extends 'shop/index.html.twig' %}
+
+{% block content %}
+    <div class="row mt-4">
+        <div class="col">
+            <h3>Меню</h3>
+            <br>
+            <div class="row">
+                {% for product in products %}
+                {% set available = true %}
+                {% if product.quantity == 0 or product.quantity is null %}
+                    {% set available = false %}
+                {% endif %}
+                {% set margin = 'mb-5' %}
+                {% include 'shop/product-card.html.twig' %}
+                {% if (loop.index % 4) == 0 and loop.index0 != 0 %}
+            </div>
+            <div class="row">
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

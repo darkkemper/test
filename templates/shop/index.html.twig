@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Магазин тортов{% endblock %}
+
+{% block body %}
+    <main role="main">
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col"><a href="/"><span class="h1">Магазин тортов</span></a></div>
+                <div class="col-auto">
+                    <button type="button" class="btn btn-sm mt-2 btn-light nav-drawer-open" data-toggle="modal" data-target="{% if user is not null %}#cart-modal{% else %}#login-modal{% endif %}">
+                        <span class="cart-total-price">0</span> <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <div class="modal fade" id="cart-modal" tabindex="-1" aria-labelledby="cart-modal-label" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="cart-modal-label">Корзина</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col mt-3 shopping-cart-list">
+
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col text-left">
+                                            <span class="text-muted">Доставка:</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            100,00 ₽
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <span class="h5">Итого:</span>
+                                        </div>
+                                        <div class="col text-right">
+                                            <span class="total-delivery-price h5">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    <a href="/order" id="shopping-cart-submit" role="button" class="btn btn-primary">Оформить заказ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    {% if user is not null %}
+                        <a href="/logout" role="button" class="btn btn-sm mt-2 btn-light">Выйти</a>
+                    {% else %}
+                        <button type="button" class="btn btn-sm mt-2 btn-light" data-toggle="modal" data-target="#login-modal">Войти</button>
+                        <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal-label" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <form class="form-login" method="post" action="/login">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="login-modal-label">Вход для клиентов</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label for="input-email" class="">Почта</label>
+                                            <input type="email" id="email" name="email" class="form-control" aria-label="input-email" required="" autofocus="">
+
+                                            <label for="input-password" class="mt-2">Пароль</label>
+                                            <input type="password" id="input-password" name="password" class="form-control" required="">
+                                            <input type="hidden" name="_csrf_token"
+                                                   value="{{ csrf_token('authenticity_token') }}"
+                                            >
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                            <button type="submit" class="btn btn-primary">Войти</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span class="text-muted">© 2021 darkkemper</span>
+        </div>
+    </footer>
+{% endblock %}
